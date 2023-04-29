@@ -7,8 +7,8 @@ edition = "2021"
 
 [dependencies]
 # sqlite
-sqlx = { version = "0.6", features = [
-  "runtime-actix-native-tls",
+sqlx = { version = "0.7.0-alpha.2", features = [
+  "runtime-tokio",
   "sqlite",
   "json",
   "macros",

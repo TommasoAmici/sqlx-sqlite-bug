@@ -26,7 +26,6 @@ pub async fn languages_stream(
     user_id: i64,
     params: &FilterQueryParams,
 ) -> Result<Vec<LanguageStream>, Error> {
-    let mut conn = pool.acquire().await.map_err(|_| Error::DBFailedToConnect)?;
     let results = sqlx::query_file_as!(
         LanguageStream,
         // switch between these two to see the difference
@@ -39,7 +38,7 @@ pub async fn languages_stream(
         params.date_end,
         params.sensitivity,
     )
-    .fetch_all(&mut conn)
+    .fetch_all(pool)
     .await
     .map_err(|_| Error::DBFailedQuery)?;
 
